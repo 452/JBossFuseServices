@@ -6,8 +6,8 @@
   <artifactId>home</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>bundle</packaging>
-  <name>Home</name>
-  <description>Home</description>
+  <name>home</name>
+  <description>home</description>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
