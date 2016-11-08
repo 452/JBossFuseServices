@@ -8,8 +8,9 @@ public class Status {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public Status setStatus(String status) {
 		this.status = status;
+		return this;
 	}
 
 }
