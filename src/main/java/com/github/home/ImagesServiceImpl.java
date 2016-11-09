@@ -7,12 +7,16 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.camel.api.management.ManagedAttribute;
+import org.apache.camel.api.management.ManagedOperation;
+import org.apache.camel.api.management.ManagedResource;
 import org.apache.cxf.jaxrs.ext.xml.ElementClass;
 import org.apache.cxf.jaxrs.model.wadl.Description;
 import org.apache.cxf.jaxrs.model.wadl.Descriptions;
 import org.apache.cxf.jaxrs.model.wadl.DocTarget;
 
 @Path("/status")
+@ManagedResource(description = "Our custom managed endpoint")
 public class ImagesServiceImpl {
 
 	public ImagesServiceImpl() {
@@ -33,7 +37,7 @@ public class ImagesServiceImpl {
 	public StatusRequestDTO getStatus() {
 		return new StatusRequestDTO().setType("ddd");
 	}
-	
+
 	@POST
 	@Path("/changeStatus")
 	// @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -48,5 +52,15 @@ public class ImagesServiceImpl {
 	@ElementClass(request = StatusRequestDTO.class, response = StatusResponse.class)
 	public StatusResponse changeStatus() {
 		return new StatusResponse().setStatus("ddd");
+	}
+
+	@ManagedAttribute(description = "Endpoint URI", mask = true)
+	public int aaa() {
+		return 452;
+	}
+
+	@ManagedOperation(description = "sssss")
+	public int bbb() {
+		return 452;
 	}
 }

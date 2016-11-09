@@ -3,12 +3,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:cxf="http://camel.apache.org/schema/cxf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd        http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd    ">
-	<cxf:rsServer id="imagesRSEndpoint" address="http://localhost:9393/cxf/imagesRS"
-		serviceClass="com.github.home.ImagesServiceImpl" />
+	<cxf:rsServer address="http://localhost:9393/cxf/imagesRS"
+		id="imagesRSEndpoint" serviceClass="com.github.home.ImagesServiceImpl" />
 	<cxf:cxfEndpoint address="http://localhost:9192/cxf/images"
 		id="imagesEndpoint" serviceClass="com.github.home.ImagesService" />
 	<cxf:cxfEndpoint address="http://localhost:9192/cxf/report"
 		id="reportEndpoint" serviceClass="com.github.home.IncidentService" />
+	<bean class="com.github.home.ImagesProcessor" id="imagesProcessor" />
 	<bean class="com.github.home.ReportIncidentProcessor" id="reportIncidentProcessor" />
 	<bean class="com.github.home.StatusIncidentProcessor" id="statusIncidentProcessor" />
 	<camelContext id="camelContext-c1100b64-c8cb-4fa6-b382-5eea0e303c95"
@@ -27,8 +28,7 @@
 		</route>
 		<route id="cxf3">
 			<from id="images2EndpointListener" uri="cxfrs:bean:imagesRSEndpoint" />
-			<log message="${header.operationName}">
-			</log>
+			<log id="_log1" message="${header.operationName}" />
 		</route>
 		<route id="report">
 			<from id="reportIncidentStarter" uri="direct:reportIncident" />
